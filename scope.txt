@@ -1,0 +1,33 @@
+Out of Scope:
+Rest of Pokedex past 20
+Priority moves
+Special moves (leech seed)
+Accuracy modifying moves
+Terra
+Recovery moves
+Weather
+EVs/IVs
+PP
+Revives
+Abilities
+Held items
+
+Decision points
+AI opponent vs two player
+Statuses?
+Pokemon Stadium type Sim - set levels at 100 - vs leveling - done 
+Import project into pygame 
+Moves with secondary effects like stat changes?
+Critical hit? - Would need to be its own separate calc 
+    minus the defense/attack modifiers plus a mult - 
+    randint to decide 1-10 - 1 is crit?
+
+In Scope:
+STAB - Done
+Traditional damage calculation - Done
+Stat changing moves - growl, leer, etc
+What if two users have the same Pokemon? - HP as a shared value 
+    is impacted. Could list total damage acrrued between mine and
+    theirs and subtract from HP total. Check if damage is > hp for fainting
+Physical/Special split - Done
+Potions in bag

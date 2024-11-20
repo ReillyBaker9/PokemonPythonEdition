@@ -12,11 +12,12 @@ class Pokemon:
         self.moves = moves
 
 class Moves:
-    def __init__(self, name, type, power, accuracy):
+    def __init__(self, name, type, power, accuracy, moveType):
         self.name = name
         self.type = type
         self.power = power
         self.accuracy = accuracy
+        self.moveType = moveType
 
 class Types:
     def __init__(self, name, strong_against=None, weak_against=None, no_effect_against=None):
