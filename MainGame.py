@@ -1,6 +1,7 @@
 from Classes import *
 from Pokedex import *
 from random import randint
+import copy
 
 def initializeGame():
     global Player
@@ -11,9 +12,12 @@ def initializeGame():
     Player.y = 0
 
     # temporarily set team to three starter evos
-    Player.team.append(Pokedex[2])
-    Player.team.append(Pokedex[5])
-    Player.team.append(Pokedex[8])
+    Mon1 = copy.copy(Venusaur)
+    Mon2 = copy.copy(Charizard)
+    Mon3 = copy.copy(Blastoise)
+    Player.team.append(Mon1)
+    Player.team.append(Mon2)
+    Player.team.append(Mon3)
 
     for k in range(len(Player.team)):
             print(Player.team[k].name)
@@ -32,37 +36,29 @@ def initializeGame():
         
 
 def startBattle():
-    opponent = Opponent("Gary", [Venusaur, Pidgey, Caterpie, Charmander])
+    OppMon1 = copy.copy(Venusaur)
+    OppMon2 = copy.copy(Pidgey)
+    OppMon3 = copy.copy(Caterpie)
+    OppMon4 = copy.copy(Charmander)
+    opponent = Opponent("Gary", [OppMon1, OppMon2, OppMon3, OppMon4])
     print("You are challenged by " + opponent.name + "!")
     print("Opponent's team: ")
     for i in range(len(opponent.team)):
         print(opponent.team[i].name)
     # global PlayerMon
     PlayerMon = Player.team[0]
-    tempHP = PlayerMon.hp
-    tempAtk = PlayerMon.attack
-    tempDefense = PlayerMon.defense
-    tempSpAtk = PlayerMon.spattack
-    tempSpDef = PlayerMon.spdefense
-    tempSpeed = PlayerMon.speed
     # global OpponentMon
     OpponentMon = opponent.team[0]
-    oppHP = OpponentMon.hp
-    oppAtk = OpponentMon.attack
-    oppDefense = OpponentMon.defense
-    oppSpAtk = OpponentMon.spattack
-    oppSpDef = OpponentMon.spdefense
-    oppSpeed = OpponentMon.speed
     print("Go! " + PlayerMon.name + "!")
     print("Opponent sent out " + OpponentMon.name + "!")
-    playerTurn(PlayerMon, OpponentMon)
+    return PlayerMon, OpponentMon
 
-def playerTurn(PlayerMon, OpponentMon):
-    def calcPriority(move, tempSpeed, oppSpeed):
+def Turn(PlayerMon, OpponentMon):
+    def calcPriority(move, mySpeed, oppSpeed):
         speedTie = randint(1, 2)
-        if tempSpeed < oppSpeed:
+        if mySpeed < oppSpeed:
             return 1
-        if tempSpeed == oppSpeed:
+        if mySpeed == oppSpeed:
             if speedTie == 1:
                 return 1
             else:
@@ -72,7 +68,8 @@ def playerTurn(PlayerMon, OpponentMon):
 
     def calcDamage(move, Attacker, Defender):
         # comes from damage calc page, stays same for level 100
-        print("The defender's hp is: " + str(Defender.hp))
+        print("The HP of " + Defender.name + " is: " + str(Defender.hp))
+        print(Attacker.name + " used " + move.name + "!")
         if move.moveType == "Special":
             attackingStat = Attacker.spattack
             defendingStat = Defender.spdefense
@@ -87,10 +84,10 @@ def playerTurn(PlayerMon, OpponentMon):
             stabMult = 1.0
         randomFactor = (randint(85, 100))/100
         typeMod = checkType(move, Defender)
-        damage = baseDamage * stabMult * randomFactor * typeMod
+        damage = int(baseDamage * stabMult * randomFactor * typeMod)
         Defender.hp = int(Defender.hp - damage)
-        print("The defender's new HP is: " + str(Defender.hp))
-        return
+        print("The HP of " + Defender.name + " is now: " + str(Defender.hp))
+        return str(damage)
 
     def checkType(move, Defender):
         typeMod = 1
@@ -120,7 +117,8 @@ def playerTurn(PlayerMon, OpponentMon):
                 # setStats()
                 return
             else:
-                calcDamage(move, PlayerMon, OpponentMon)
+                return 1
+                # calcDamage(move, PlayerMon, OpponentMon)
 
     def playerSwitch(PlayerMon):
         for k in range(len(Player.team)):
@@ -138,28 +136,16 @@ def playerTurn(PlayerMon, OpponentMon):
         return
     
     def opponentTurn(PlayerMon):
-        print("Opponent's " + OpponentMon.name + " attacked for 10 damage!")
-        PlayerMon.hp = PlayerMon.hp - 10
-        print("Your " + PlayerMon.name + " is now at " + str(PlayerMon.hp) + " hp!")
+        move = randint(0, (len(OpponentMon.moves)-1))
+        chosenMove = OpponentMon.moves[move]
+        if checkAccuracy(chosenMove) == 1:
+            print("Opponent's " + OpponentMon.name + " attacked for " + calcDamage(chosenMove, OpponentMon, PlayerMon) + " damage!")
         return PlayerMon
-    
+     
     # leave it as 0 for now
     statChange = 0
     if statChange == 1:
         setStats()
-    else:
-        tempHP = PlayerMon.hp
-        tempAtk = PlayerMon.attack
-        tempDefense = PlayerMon.defense
-        tempSpAtk = PlayerMon.spattack
-        tempSpDef = PlayerMon.spdefense
-        tempSpeed = PlayerMon.speed
-        oppHP = OpponentMon.hp
-        oppAtk = OpponentMon.attack
-        oppDefense = OpponentMon.defense
-        oppSpAtk = OpponentMon.spattack
-        oppSpDef = OpponentMon.spdefense
-        oppSpeed = OpponentMon.speed
     print("What will you do?")
     print("1. Fight")
     print("2. Switch Pokemon")
@@ -170,22 +156,27 @@ def playerTurn(PlayerMon, OpponentMon):
         for i in range(len(PlayerMon.moves)): 
             print(str(i+1) + ". " + str(PlayerMon.moves[i].name))
         moveIndex = int(input("Select move: ")) - 1
-        if calcPriority(PlayerMon.moves[moveIndex], tempSpeed, oppSpeed) == 1:
+        # If opponent is faster:
+        if calcPriority(PlayerMon.moves[moveIndex], PlayerMon.speed, OpponentMon.speed) == 1:
             opponentTurn(PlayerMon)
-            checkAccuracy(PlayerMon.moves[moveIndex])
-            playerTurn(PlayerMon, OpponentMon)
+            if checkAccuracy(PlayerMon.moves[moveIndex]) == 1:
+                calcDamage(PlayerMon.moves[moveIndex], PlayerMon, OpponentMon)
+            Turn(PlayerMon, OpponentMon)
+        # If player is faster
         else:
-            checkAccuracy(PlayerMon.moves[moveIndex])
+            if checkAccuracy(PlayerMon.moves[moveIndex]) == 1:
+                calcDamage(PlayerMon.moves[moveIndex], PlayerMon, OpponentMon)
             opponentTurn(PlayerMon)
-            playerTurn(PlayerMon, OpponentMon)
+            Turn(PlayerMon, OpponentMon)
         
 
     if battleChoice == "2":
-        playerTurn(opponentTurn(playerSwitch(PlayerMon)), OpponentMon)
+        Turn(opponentTurn(playerSwitch(PlayerMon)), OpponentMon)
 
 def main():
     print("Welcome to Pokemon!")
     initializeGame()
-    startBattle()
+    PlayerMon, OpponentMon = startBattle()
+    Turn(PlayerMon, OpponentMon)
 
 main()

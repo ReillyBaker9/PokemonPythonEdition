@@ -23,11 +23,15 @@ Critical hit? - Would need to be its own separate calc
     randint to decide 1-10 - 1 is crit?
 
 In Scope:
+Turns should be repeatable ad nasueum and be independent, 
+    need a function that goes through all sub-functions for a turn
+    and nothing else
 STAB - Done
 Traditional damage calculation - Done
 Stat changing moves - growl, leer, etc
-What if two users have the same Pokemon? - HP as a shared value 
-    is impacted. Could list total damage acrrued between mine and
-    theirs and subtract from HP total. Check if damage is > hp for fainting
+    Could store multipliers that change for each
+Switching Pokemon should reset stats
+What if two users have the same Pokemon? - Fixed. Used Copy module to create
+    copies of Pokemon for stat changing and hp modification
 Physical/Special split - Done
 Potions in bag
