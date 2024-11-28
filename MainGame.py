@@ -54,9 +54,7 @@ def startBattle():
     print("Opponent sent out " + opponent_mon.name + "!")
     return player_mon, opponent_mon
 
-
-def Turn(player_mon, opponent_mon):
-    def calcPriority(move, mySpeed, oppSpeed):
+def calcPriority(move, mySpeed, oppSpeed):
         speedTie = randint(1, 2)
         if mySpeed < oppSpeed:
             return 1
@@ -68,7 +66,8 @@ def Turn(player_mon, opponent_mon):
         else:
             return 2
 
-    def calcDamage(move, Attacker, Defender):
+
+def calcDamage(move, Attacker, Defender):
         # comes from damage calc page, stays same for level 100
         print("The HP of " + Defender.name + " is: " + str(Defender.hp))
         print(Attacker.name + " used " + move.name + "!")
@@ -91,7 +90,8 @@ def Turn(player_mon, opponent_mon):
         print("The HP of " + Defender.name + " is now: " + str(Defender.hp))
         return str(damage)
 
-    def checkType(move, defender):
+
+def checkType(move, defender):
         type_mod = 1
         for defender_type in defender.type:
             if defender_type in move.type.strong_against:
@@ -108,7 +108,8 @@ def Turn(player_mon, opponent_mon):
             print("The move had no effect.")
         return type_mod
 
-    def checkAccuracy(move):
+
+def checkAccuracy(move):
         check = randint(1, 100)
         if check > move.accuracy:
             print(move.name + " missed!")
@@ -121,35 +122,37 @@ def Turn(player_mon, opponent_mon):
                 return 1
                 # calcDamage(move, PlayerMon, OpponentMon)
 
-    def playerSwitch(player_mon):
-        for k in range(len(Player.team)):
-            print(str(k + 1) + ". " + Player.team[k].name)
-        mon = int(input("Which Pokemon will you switch to? ")) - 1
-        if Player.team[mon] == player_mon or Player.team[mon].hp <= 0:
-            print("Can't switch to that Pokemon!")
-            return playerSwitch(player_mon)
-        else:
-            player_mon = Player.team[mon]
-            print("Switched to " + player_mon.name)
-            return player_mon
+def playerSwitch(player_mon):
+    for k in range(len(Player.team)):
+        print(str(k + 1) + ". " + Player.team[k].name)
+    mon = int(input("Which Pokemon will you switch to? ")) - 1
+    if Player.team[mon] == player_mon or Player.team[mon].hp <= 0:
+        print("Can't switch to that Pokemon!")
+        return playerSwitch(player_mon)
+    else:
+        player_mon = Player.team[mon]
+        print("Switched to " + player_mon.name)
+        return player_mon
 
-    def setStats(Attacker, Defender, operation):
+def setStats(Attacker, Defender, operation):
+    return
+
+def playerHealthCheck(player_mon, opponent_mon):
+    if player_mon.hp <= 0:
+        print(Player.name + "'s " + player_mon.name + " fainted!")
+        Turn(playerSwitch(player_mon), opponent_mon)
         return
 
-    def playerHealthCheck(Pokemon):
-        if Pokemon.hp <= 0:
-            print(Player.name + "'s " + Pokemon.name + " fainted!")
-            Turn(playerSwitch(player_mon), opponent_mon)
-            return
-
-    def opponentTurn(player_mon):
+def opponentTurn(player_mon, opponent_mon):
         move = randint(0, (len(opponent_mon.moves) - 1))
         chosen_move = opponent_mon.moves[move]
         if checkAccuracy(chosen_move) == 1:
             print("Opponent's " + opponent_mon.name + " attacked for " + calcDamage(chosen_move, opponent_mon,
                                                                                     player_mon) + " damage!")
         return player_mon
-
+    
+       
+def Turn(player_mon, opponent_mon):
     # leave it as 0 for now
     stat_change = 0
     # if stat_change == 1:
@@ -179,8 +182,8 @@ def Turn(player_mon, opponent_mon):
                 move_index = -1
         # If opponent is faster:
         if calcPriority(player_mon.moves[move_index], player_mon.speed, opponent_mon.speed) == 1:
-            opponentTurn(player_mon)
-            playerHealthCheck(player_mon)
+            opponentTurn(player_mon, opponent_mon)
+            playerHealthCheck(player_mon, opponent_mon)
             if checkAccuracy(player_mon.moves[move_index]) == 1:
                 calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
             Turn(player_mon, opponent_mon)
@@ -188,12 +191,12 @@ def Turn(player_mon, opponent_mon):
         else:
             if checkAccuracy(player_mon.moves[move_index]) == 1:
                 calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
-            opponentTurn(player_mon)
-            playerHealthCheck(player_mon)
+            opponentTurn(player_mon, opponent_mon)
+            playerHealthCheck(player_mon, opponent_mon)
             Turn(player_mon, opponent_mon)
 
     if battle_choice == "2":
-        Turn(opponentTurn(playerSwitch(player_mon)), opponent_mon)
+        Turn(opponentTurn(playerSwitch(player_mon), player_mon), opponent_mon)
 
 
 def main():
