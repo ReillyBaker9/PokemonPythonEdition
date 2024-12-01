@@ -13,25 +13,31 @@ Abilities
 Held items
 
 Decision points
-AI opponent vs two player
+Reset button?
 Statuses?
-Pokemon Stadium type Sim - set levels at 100 - vs leveling - done 
 Import project into pygame 
 Moves with secondary effects like stat changes?
 Critical hit? - Would need to be its own separate calc 
     minus the defense/attack modifiers plus a mult - 
     randint to decide 1-10 - 1 is crit?
+------
+AI opponent vs two player - AI, done
+Pokemon Stadium type Sim - set levels at 100 - vs leveling - done 
 
 In Scope:
 Turns should be repeatable ad nasueum and be independent, 
     need a function that goes through all sub-functions for a turn
     and nothing else
-STAB - Done
-Traditional damage calculation - Done
 Stat changing moves - growl, leer, etc
     Could store multipliers that change for each
 Switching Pokemon should reset stats
-What if two users have the same Pokemon? - Fixed. Used Copy module to create
-    copies of Pokemon for stat changing and hp modification
-Physical/Special split - Done
 Potions in bag
+Back options for every menu
+Team selection
+----------
+What if two users have the same Pokemon? - Fixed. Used Copy module to create
+    copies of Pokemon for stat changing and hp modification - Done
+Physical/Special split - Done
+STAB - Done
+Traditional damage calculation - Done
+Battle finishes when either team has no pokemon left - Done

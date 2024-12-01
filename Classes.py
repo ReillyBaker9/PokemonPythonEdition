@@ -1,8 +1,8 @@
 class Pokemon:
-    def __init__(self, name, pokedex, type, hp, attack, defense, spattack, spdefense, speed, moves):
+    def __init__(self, name, pokedex, types, hp, attack, defense, spattack, spdefense, speed, moves):
         self.name = name
         self.pokedex = pokedex
-        self.type = type
+        self.type = types
         self.hp = hp
         self.attack = attack
         self.defense = defense
@@ -22,11 +22,8 @@ class Moves:
 
 
 class Types:
-    def __init__(self, name, strong_against=None, weak_against=None, no_effect_against=None):
+    def __init__(self, name):
         self.name = name
-        self.strong_against = strong_against if strong_against is not None else []
-        self.weak_against = weak_against if weak_against is not None else []
-        self.no_effect_against = no_effect_against if no_effect_against is not None else []
 
 
 class Player:

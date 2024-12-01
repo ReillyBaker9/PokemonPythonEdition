@@ -1,6 +1,8 @@
 from Classes import *
 from Pokedex import *
 from random import randint
+from OpponentAI import *
+from Types import *
 import copy
 
 
@@ -41,9 +43,11 @@ def startBattle():
     # arbitrarily assign opponent team
     opp_mon1 = copy.copy(Venusaur)
     opp_mon2 = copy.copy(Pidgey)
-    opp_mon3 = copy.copy(Caterpie)
-    opp_mon4 = copy.copy(Charmander)
-    opponent = Opponent("Gary", [opp_mon1, opp_mon2, opp_mon3, opp_mon4])
+    # opp_mon3 = copy.deepcopy(Caterpie)
+    # opp_mon4 = copy.deepcopy(Charmander)
+    global opponent 
+    opponent = Opponent("Gary", [opp_mon1, opp_mon2])
+    # opponent = Opponent("Gary", [opp_mon1, opp_mon2, opp_mon3, opp_mon4])
     print("You are challenged by " + opponent.name + "!")
     print("Opponent's team: ")
     for i in range(len(opponent.team)):
@@ -54,7 +58,8 @@ def startBattle():
     print("Opponent sent out " + opponent_mon.name + "!")
     return player_mon, opponent_mon
 
-def calcPriority(move, mySpeed, oppSpeed):
+
+def calcPriority(mySpeed, oppSpeed):
         speedTie = randint(1, 2)
         if mySpeed < oppSpeed:
             return 1
@@ -84,29 +89,20 @@ def calcDamage(move, Attacker, Defender):
         else:
             stab_mult = 1.0
         random_factor = (randint(85, 100)) / 100
-        type_mod = checkType(move, Defender)
-        damage = int(base_damage * stab_mult * random_factor * type_mod)
+        type_mult = 1.0
+        for defender_type in Defender.type:
+            if defender_type in type_effectiveness.get(move.type, {}):
+                type_mult *= type_effectiveness[move.type][defender_type]
+        # Print effectiveness message
+        if type_mult > 1:
+            print("It's super effective!")
+        elif type_mult < 1:
+            print("It's not very effective...")
+         
+        damage = int(base_damage * stab_mult * random_factor * type_mult)
         Defender.hp = int(Defender.hp - damage)
         print("The HP of " + Defender.name + " is now: " + str(Defender.hp))
         return str(damage)
-
-
-def checkType(move, defender):
-        type_mod = 1
-        for defender_type in defender.type:
-            if defender_type in move.type.strong_against:
-                type_mod *= 2
-            elif defender_type in move.type.weak_against:
-                type_mod *= 0.5
-            elif defender_type in move.type.no_effect_against:
-                type_mod *= 0
-        if type_mod > 1:
-            print("It's super effective!")
-        elif type_mod < 1:
-            print("It's not very effective")
-        elif type_mod == 0:
-            print("The move had no effect.")
-        return type_mod
 
 
 def checkAccuracy(move):
@@ -153,50 +149,63 @@ def opponentTurn(player_mon, opponent_mon):
     
        
 def Turn(player_mon, opponent_mon):
-    # leave it as 0 for now
-    stat_change = 0
-    # if stat_change == 1:
-    #     setStats()
-    print("What will you do?")
-    print("1. Fight")
-    print("2. Switch Pokemon")
-    print("3. Bag")
-    acceptable_inputs = ["1", "2", "3"]
-    battle_choice = input("Choice: ")
-    while battle_choice not in acceptable_inputs:
-        print("Invalid selection.")
+    while player_mon.hp > 0 and opponent_mon.hp > 0:
+        print("What will you do?")
+        print("1. Fight")
+        print("2. Switch Pokemon")
+        print("3. Bag")
+        acceptable_inputs = ["1", "2", "3"]
         battle_choice = input("Choice: ")
-    if battle_choice == "1":
-        print("Use which move?")
-        for i in range(len(player_mon.moves)):
-            print(str(i + 1) + ". " + str(player_mon.moves[i].name))
-        try:
-            move_index = int(input("Select move: ")) - 1
-        except ValueError:
-            move_index = -1
-        while move_index not in [0, 1, 2, 3]:
+        while battle_choice not in acceptable_inputs:
             print("Invalid selection.")
+            battle_choice = input("Choice: ")
+        if battle_choice == "2":
+            Turn(opponentTurn(playerSwitch(player_mon), player_mon), opponent_mon)
+            
+        if battle_choice == "1":
+            print("Use which move?")
+            for i in range(len(player_mon.moves)):
+                print(str(i + 1) + ". " + str(player_mon.moves[i].name))
             try:
                 move_index = int(input("Select move: ")) - 1
             except ValueError:
                 move_index = -1
-        # If opponent is faster:
-        if calcPriority(player_mon.moves[move_index], player_mon.speed, opponent_mon.speed) == 1:
-            opponentTurn(player_mon, opponent_mon)
-            playerHealthCheck(player_mon, opponent_mon)
-            if checkAccuracy(player_mon.moves[move_index]) == 1:
-                calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
-            Turn(player_mon, opponent_mon)
-        # If player is faster
-        else:
-            if checkAccuracy(player_mon.moves[move_index]) == 1:
-                calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
-            opponentTurn(player_mon, opponent_mon)
-            playerHealthCheck(player_mon, opponent_mon)
-            Turn(player_mon, opponent_mon)
-
-    if battle_choice == "2":
-        Turn(opponentTurn(playerSwitch(player_mon), player_mon), opponent_mon)
+            while move_index not in [0, 1, 2, 3]:
+                print("Invalid selection.")
+                try:
+                    move_index = int(input("Select move: ")) - 1
+                except ValueError:
+                    move_index = -1
+            # If opponent is faster:
+            if calcPriority(player_mon.speed, opponent_mon.speed) == 1:
+                opponentTurn(player_mon, opponent_mon)
+                playerHealthCheck(player_mon, opponent_mon)
+                if checkAccuracy(player_mon.moves[move_index]) == 1:
+                    calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
+                if opponent_mon.hp <= 0:
+                    opponent_mon = switch_on_faint(opponent)
+                    if opponent_mon is None:
+                        # define end battle
+                        print("Battle should be over")
+                        return
+                
+            # If player is faster
+            else:
+                if checkAccuracy(player_mon.moves[move_index]) == 1:
+                    calcDamage(player_mon.moves[move_index], player_mon, opponent_mon)
+                if opponent_mon.hp <= 0:
+                    opponent_mon = switch_on_faint(opponent)
+                    if opponent_mon is None:
+                        # define end battle
+                        print("Battle should be over")
+                        return
+                    else:
+                        continue  # Move to the next iteration of the loop if opponent switches Pokemon
+                    
+                opponentTurn(player_mon, opponent_mon)
+                playerHealthCheck(player_mon, opponent_mon)
+    print("Battle ended.")
+        
 
 
 def main():
