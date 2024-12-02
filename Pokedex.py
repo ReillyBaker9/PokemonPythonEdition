@@ -7,7 +7,9 @@ Ivysaur = Pokemon("Ivysaur", 2, [Grass, Poison], 364, 236, 236, 284, 284, 236, [
 Venusaur = Pokemon("Venusaur", 3, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
 Charmander = Pokemon("Charmander", 4, [Fire], 282, 203, 178, 240, 218, 251, [scratch, ember, fire_fang, flamethrower])
 Charmeleon = Pokemon("Charmeleon", 5, [Fire], 320, 223, 202, 284, 240, 284, [scratch, ember, fire_fang, flamethrower])
-Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, ember, fire_fang, flamethrower])
+# Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, ember, fire_fang, flamethrower])
+# Giving Charizard Nasty Plot to check stat changes
+Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, nasty_plot, fire_fang, flamethrower])
 Squirtle = Pokemon("Squirtle", 7, [Water], 292, 197, 251, 218, 251, 197, [tackle, water_gun, hydro_pump, surf])
 Wartortle = Pokemon("Wartortle", 8, [Water], 324, 223, 284, 240, 284, 223, [tackle, water_gun, hydro_pump, surf])
 # temporarily changing types for checking effectiveness to add 4x weakness to water

@@ -10,15 +10,23 @@ class Pokemon:
         self.spdefense = spdefense
         self.speed = speed
         self.moves = moves
+        self.battleAttack = attack
+        self.battleDefense = defense
+        self.battleSpattack = spattack
+        self.battleSpdefense = spdefense
+        self.battleSpeed = speed
 
 
 class Moves:
-    def __init__(self, name, type, power, accuracy, moveType):
+    def __init__(self, name, type, power, accuracy, moveType, target=None, modifier=None, stat=None):
         self.name = name
         self.type = type
         self.power = power
         self.accuracy = accuracy
         self.moveType = moveType
+        self.target = target
+        self.modifier = modifier
+        self.stat = stat
 
 
 class Types:
