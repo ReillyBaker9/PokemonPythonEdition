@@ -243,7 +243,7 @@ def Turn(player_mon, opponent_mon):
                 except ValueError:
                     move_index = -1
             # If opponent is faster:
-            if calcPriority(player_mon.speed, opponent_mon.speed) == 1:
+            if calcPriority(player_mon.battleSpeed, opponent_mon.battleSpeed) == 1:
                 opponentTurn(player_mon, opponent_mon)
                 playerHealthCheck(player_mon, opponent_mon)
                 if checkAccuracy(player_mon.moves[move_index], player_mon, opponent_mon, 0) == 1:
