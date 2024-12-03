@@ -12,7 +12,6 @@ Charmeleon = Pokemon("Charmeleon", 5, [Fire], 320, 223, 202, 284, 240, 284, [scr
 Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, nasty_plot, fire_fang, flamethrower])
 Squirtle = Pokemon("Squirtle", 7, [Water], 292, 197, 251, 218, 251, 197, [tackle, water_gun, hydro_pump, surf])
 Wartortle = Pokemon("Wartortle", 8, [Water], 324, 223, 284, 240, 284, 223, [tackle, water_gun, hydro_pump, surf])
-# temporarily changing types for checking effectiveness to add 4x weakness to water
 Blastoise = Pokemon("Blastoise", 9, [Water], 362, 267, 328, 284, 328, 267, [tackle, water_gun, hydro_pump, surf])
 Caterpie = Pokemon("Caterpie", 10, [Bug], 294, 157, 178, 140, 140, 197, [tackle])
 Metapod = Pokemon("Metapod", 11, [Bug], 304, 140, 229, 162, 162, 162, [harden])

@@ -35,14 +35,16 @@ class Types:
 
 
 class Player:
-    def __init__(self, name, team, x, y):
+    def __init__(self, name, team):
         self.name = name
         self.team = team
-        self.x = x
-        self.y = y
+        self.current_pokemon = None
+        
 
 
 class Opponent:
     def __init__(self, name, team):
         self.name = name
         self.team = team
+        self.current_pokemon = None
+        
