@@ -121,6 +121,8 @@ def checkAccuracy(move, Player, opponent, user):
 
 def playerSwitch(Player):
     global attackMult, defenseMult, spattackMult, spdefenseMult, speedMult
+    if all(pokemon.hp <= 0 for pokemon in Player.team):
+        endBattle(opponent)
     for k in range(len(Player.team)):
         print(str(k + 1) + ". " + Player.team[k].name)
     mon = int(input("Which Pokemon will you switch to? ")) - 1
@@ -258,8 +260,6 @@ def Turn(Player, opponent):
                     opponent.current_pokemon = switch_on_faint(opponent)
                     oppAttackMult = oppDefenseMult = oppSpattackMult = oppSpdefenseMult = oppSpeedMult = 0
                     if opponent.current_pokemon is None:
-                        # define end battle
-                        print("Battle should be over")
                         endBattle(Player)
                         return
                 
@@ -270,8 +270,6 @@ def Turn(Player, opponent):
                 if opponent.current_pokemon.hp <= 0:
                     opponent.current_pokemon = switch_on_faint(opponent)
                     if opponent.current_pokemon is None:
-                        # define end battle
-                        print("Battle should be over")
                         endBattle(Player)
                         return
                     else:
