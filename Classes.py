@@ -10,6 +10,7 @@ class Pokemon:
         self.spdefense = spdefense
         self.speed = speed
         self.moves = moves
+        self.battleHp = hp
         self.battleAttack = attack
         self.battleDefense = defense
         self.battleSpattack = spattack
