@@ -14,7 +14,7 @@ def initializeGame():
     Player.name = "Reilly"
     Player.team = []
     # temporarily set team to three starter evos
-    mon1 = copy.copy(Venusaur)
+    mon1 = copy.copy(Caterpie)
     mon2 = copy.copy(Charizard)
     mon3 = copy.copy(Blastoise)
     Player.team.append(mon1)
@@ -287,7 +287,7 @@ def Turn(Player, opponent):
                 move_index = int(input("Select move: ")) - 1
             except ValueError:
                 move_index = -1
-            while move_index not in [0, 1, 2, 3, 4]:
+            while move_index not in range(len(Player.current_pokemon.moves) + 1):
                 print("Invalid selection.")
                 try:
                     move_index = int(input("Select move: ")) - 1
