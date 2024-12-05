@@ -11,12 +11,13 @@ PP
 Revives
 Abilities
 Held items
+Bag/Using items
 
 Decision points
 Reset button?
-Statuses?
-Import project into pygame 
-Moves with secondary effects like stat changes?
+Statuses? - Nope
+Import project into pygame - Nope
+Moves with secondary effects like stat changes? - Nope
 Critical hit? - Would need to be its own separate calc 
     minus the defense/attack modifiers plus a mult - 
     randint to decide 1-10 - 1 is crit?
@@ -28,13 +29,12 @@ In Scope:
 Turns should be repeatable ad nasueum and be independent, 
     need a function that goes through all sub-functions for a turn
     and nothing else
-Stat changing moves - growl, leer, etc
-    Could store multipliers that change for each
-Switching Pokemon should reset stats
-Potions in bag
-Back options for every menu
+
+Back options for every menu - Done?
 Team selection
 ----------
+Stat changing moves - growl, leer, etc - Done
+Switching Pokemon should reset stats - Done
 What if two users have the same Pokemon? - Fixed. Used Copy module to create
     copies of Pokemon for stat changing and hp modification - Done
 Physical/Special split - Done

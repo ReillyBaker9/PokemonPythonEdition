@@ -1,5 +1,6 @@
 class Pokemon:
     def __init__(self, name, pokedex, types, hp, attack, defense, spattack, spdefense, speed, moves):
+        # battle stats start as the same as base stats and are modified in battle
         self.name = name
         self.pokedex = pokedex
         self.type = types
@@ -20,6 +21,7 @@ class Pokemon:
 
 class Moves:
     def __init__(self, name, type, power, accuracy, moveType, target=None, modifier=None, stat=None):
+        # target, modifier, and stat only have values if move is a status move
         self.name = name
         self.type = type
         self.power = power
@@ -32,11 +34,13 @@ class Moves:
 
 class Types:
     def __init__(self, name):
+        # Just need a name lol
         self.name = name
 
 
 class Player:
     def __init__(self, name, team):
+        # Starts with None as current pokemon and is assigned at beginning of battle
         self.name = name
         self.team = team
         self.current_pokemon = None
@@ -45,6 +49,7 @@ class Player:
 
 class Opponent:
     def __init__(self, name, team):
+        # Same as player
         self.name = name
         self.team = team
         self.current_pokemon = None

@@ -2,6 +2,8 @@ from Classes import *
 from Moves import *
 from Types import *
 
+# defined a list of Pokemon starting early in the dex to test
+
 Bulbasaur = Pokemon("Bulbasaur", 1, [Grass, Poison], 294, 197, 197, 240, 240, 197, [tackle, vine_whip, razor_leaf, solar_beam])
 Ivysaur = Pokemon("Ivysaur", 2, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
 Venusaur = Pokemon("Venusaur", 3, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
@@ -25,4 +27,5 @@ Pidgeot = Pokemon("Pidgeot", 18, [Normal, Flying], 384, 240, 229, 240, 240, 328,
 Rattata = Pokemon("Rattata", 19, [Normal], 244, 229, 178, 162, 178, 306, [tackle, quick_attack])
 Raticate = Pokemon("Raticate", 20, [Normal], 314, 284, 229, 196, 262, 328, [tackle, quick_attack, hyper_fang])
 
+# adding them to the Pokedex for easy access of the array
 Pokedex = [Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise, Caterpie, Metapod, Butterfree, Weedle, Kakuna, Beedrill, Pidgey, Pidgeotto, Pidgeot, Rattata, Raticate]

@@ -1,20 +1,20 @@
 from Classes import Moves
 from Types import *
 
+# for status moves, the stats are 0. Attack 1. Defense 2. Special Attack 3. Special Defense 4. Speed
+# defining a handful of moves
+
 ember = Moves("Ember", Fire, 40, 100, "Special")
 fire_fang = Moves("Fire Fang", Fire, 65, 95, "Physical")
 flamethrower = Moves("Flamethrower", Fire, 90, 100, "Special")
 gust = Moves("Gust", Flying, 40, 100, "Special")
 quick_attack = Moves("Quick Attack", Normal, 40, 100, "Physical")
-
-# Lowering scratch's accuracy for testing, don't forget to change!
 scratch = Moves("Scratch", Normal, 40, 100, "Physical")
-
 tackle = Moves("Tackle", Normal, 40, 100, "Physical")
 wing_attack = Moves("Wing Attack", Flying, 60, 100, "Physical")
-harden = Moves("Harden", Normal, 0, 100, "Status", "Self", 1, "Defense")
-growl = Moves("Growl", Normal, 0, 100, "Status", "Opponent", -1, "Attack")
-nasty_plot = Moves("Nasty Plot", Normal, 0, 100, "Status", "Self", 2, "Spattack")
+harden = Moves("Harden", Normal, 0, 100, "Status", "Self", 1, 1)
+growl = Moves("Growl", Normal, 0, 100, "Status", "Opponent", -1, 0)
+nasty_plot = Moves("Nasty Plot", Normal, 0, 100, "Status", "Self", 2, 2)
 poison_sting = Moves("Poison Sting", Poison, 15, 100, "Physical")
 pin_missile = Moves("Pin Missile", Bug, 25, 95, "Physical")
 razor_leaf = Moves("Razor Leaf", Grass, 55, 95, "Physical")
@@ -26,6 +26,7 @@ hydro_pump = Moves("Hydro Pump", Water, 110, 80, "Special")
 fury_attack = Moves("Fury Attack", Normal, 15, 85, "Physical")
 hyper_fang = Moves("Hyper Fang", Normal, 80, 90, "Physical")
 
+# for stat calculations
 stat_multipliers = { -6: .25, -5: .286, -4: .333, -3: .4, -2: .5, -1: .667,
                     0: 1, 1: 1.5, 2: 2, 3: 2.5, 4: 3, 5: 3.5, 6: 4}
 
@@ -39,6 +40,8 @@ global oppDefenseMult
 global oppSpattackMult
 global oppSpdefenseMult
 global oppSpeedMult
+
+# itiliazing the global variables for stat multipliers that get modified in battle
 
 attackMult = 0
 defenseMult = 0

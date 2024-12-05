@@ -1,5 +1,6 @@
 from Classes import Types
 
+# defining all the types and giving them names
 Fire = Types("Fire")
 Grass = Types("Grass")
 Water = Types("Water")
@@ -20,7 +21,7 @@ Fairy = Types("Fairy")
 Dark = Types("Dark")
 
 
-
+# defining all the type multipliers for damage calculations
 type_effectiveness = {
     Normal: {Rock: 0.5, Ghost: 0, Steel: 0.5},
     Fire: {Fire: 0.5, Water: 0.5, Grass: 2, Ice: 2, Bug: 2, Rock: 0.5, Dragon: 0.5, Steel: 2},
