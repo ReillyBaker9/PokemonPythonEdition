@@ -18,12 +18,10 @@ Reset button?
 Statuses? - Nope
 Import project into pygame - Nope
 Moves with secondary effects like stat changes? - Nope
-Critical hit? - Would need to be its own separate calc 
-    minus the defense/attack modifiers plus a mult - 
-    randint to decide 1-10 - 1 is crit?
 ------
 AI opponent vs two player - AI, done
 Pokemon Stadium type Sim - set levels at 100 - vs leveling - done 
+Critical hit? - Done
 
 In Scope:
 Turns should be repeatable ad nasueum and be independent, 
