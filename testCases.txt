@@ -1,3 +1,0 @@
-Things that need to be tested because they may not work:
-TESTED/WORKS - Pokemon with less than 4 moves (Menus and inputs might break)
-Make sure back button can be used whenever needed

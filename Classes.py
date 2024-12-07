@@ -17,6 +17,16 @@ class Pokemon:
         self.battleSpattack = spattack
         self.battleSpdefense = spdefense
         self.battleSpeed = speed
+    
+    # suggested by CoPilot as a way to reset 
+    # health after restarting the battle
+    def reset_health(self):
+        self.battleHp = self.hp
+        self.battleAttack = self.attack
+        self.battleDefense = self.defense
+        self.battleSpattack = self.spattack
+        self.battleSpdefense = self.spdefense
+        self.battleSpeed = self.speed
 
 
 class Moves:

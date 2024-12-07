@@ -11,30 +11,76 @@ def initializeGame():
     # define the player as a global variable to add a team to
     global Player
     # Player can decide their name and which Pokemon they want on their team
-    # Player.name = input("What is your name? ")
-    Player.name = "Reilly"
+    Player.name = input("What is your name? ")
+    Player.team = []
+    
+    # global pokeList
+    # pokeList = [Charizard, Venusaur, Blastoise]
+    chooseTeam()
+    return
+
+def chooseTeam():
+    global pokeList
+    pokeList = []
+    acceptable_inputs = [1, 2, 3, 4, 5, 6]
+    try:
+        team_length = int(input("How many Pokemon would you like? (Max of 6)\n"))
+    except ValueError:
+        team_length = -1
+    while team_length not in acceptable_inputs:
+        print("Invalid selection")
+        try:
+            team_length = int(input("How many Pokemon would you like? (Max of 6)\n"))
+        except ValueError:
+            team_length = -1
+    # print out the entire Pokedex for number reference
+    for i in range(len(Pokedex)):
+        mon = Pokedex[i]
+        print(f"{mon.pokedex}. {mon.name}")
+    # let them choose their Pokemon
+    for i in range(team_length):
+        try:
+            selection = int(input(f"Which Pokemon do you want? Use the Pokedex # ({i+1} of {team_length})\n")) - 1
+        except ValueError:
+            selection = -1
+        while selection not in range(len(Pokedex)):
+            print("Invalid selection")
+            try:
+                selection = int(input(f"Which Pokemon do you want? Use the Pokedex # ({i+1} of {team_length})\n")) - 1
+            except ValueError:
+                selection = -1
+        print(f"Chose {Pokedex[selection].name}!")
+        pokeList.append(Pokedex[selection])
+        
+def startBattle():
     Player.team = []
     # using the copy module to create copies I can then modify the attributes of
-    pokeList = [Charizard, Venusaur, Blastoise]
     for guy in pokeList:
-        Player.team.append(copy.copy(guy))
+        team_member = copy.copy(guy)
+        # reset health and stat values in case player is restarting
+        team_member.reset_health()
+        Player.team.append(team_member)
 
     # print the team name for reference
     print("Your team consists of:")
     for k in range(len(Player.team)):
         print(Player.team[k].name)
-
-def startBattle():
     # define the opponent as a global object like the player
     global opponent 
-    opponent = Opponent("Gary", [])
+    opponent = Opponent((input("What is your opponent's name? ")), [])
     # give the opponent Pokemon
-    oppList = [Venusaur, Pidgeot, Beedrill]
-    for each in oppList:
-        opponent.team.append(copy.copy(each))
+    team_size = randint(1, 6)
+    while team_size > 0:
+        pokeId = randint(0, len(Pokedex) - 1)
+        mon = copy.copy(Pokedex[pokeId])
+        opponent.team.append(mon)
+        team_size -= 1
+    # oppList = [Venusaur, Pidgeot, Beedrill]
+    # for each in oppList:
+    #     opponent.team.append(copy.copy(each))
     # bunch of text to set the stage of the battle
     print("You are challenged by " + opponent.name + "!")
-    print("Opponent's team: ")
+    print(f"{opponent.name}'s team: ")
     for i in range(len(opponent.team)):
         print(opponent.team[i].name)
     # The Pokemon currently in use is an attribute of the user so that they can all be
@@ -42,7 +88,7 @@ def startBattle():
     Player.current_pokemon = Player.team[0]
     opponent.current_pokemon = opponent.team[0]
     print("Go! " + Player.current_pokemon.name + "!")
-    print("Opponent sent out " + opponent.current_pokemon.name + "!")
+    print(f"{opponent.name} sent out {opponent.current_pokemon.name}!")
     return
 
 def calcPriority(mySpeed, oppSpeed):
@@ -323,33 +369,46 @@ def Turn(Player, opponent):
         print("2. Switch Pokemon")
         print("3. Info")
         # input error handling
-        acceptable_inputs = ["1", "2", "3"]
-        battle_choice = input("Choice: ")
+        acceptable_inputs = [1, 2, 3]
+        try:
+            battle_choice = int(input("Choice: "))
+        except ValueError:
+            battle_choice = -1
         while battle_choice not in acceptable_inputs:
             print("Invalid selection.")
-            battle_choice = input("Choice: ")
+            try:
+                battle_choice = int(input("Choice: "))
+            except ValueError:
+                battle_choice = -1
         # player switches, opponent gets to attack the new pokemon
-        if battle_choice == "2":
+        if battle_choice == 2:
             if playerSwitch(Player, False):
                 opponentTurn(Player, opponent)
             continue
         # for the getInfo function
-        if battle_choice == "3":
+        if battle_choice == 3:
             print("Which Pokemon?")
             print(f"1. {Player.name}'s {Player.current_pokemon.name}")
             print(f"2. {opponent.name}'s {opponent.current_pokemon.name}")
-            info_choice = input("Choice: ")
+            
             # more error handling
+            try: 
+                info_choice = input("Choice: ")
+            except ValueError:
+                info_choice = -1
             while info_choice not in ["1", "2"]:
                 print("Invalid selection.")
-                info_choice = input("Choice: ")
+                try: 
+                    info_choice = input("Choice: ")
+                except ValueError:
+                    info_choice = -1
             if info_choice == "1":
                 getInfo(Player.current_pokemon)
             elif info_choice == "2":
                 getInfo(opponent.current_pokemon)
             continue
         # here's the horrible monolith I want to break up
-        if battle_choice == "1":
+        if battle_choice == 1:
             print("Use which move?")
             # print the moves, their power, and their accuracy
             for i in range(len(Player.current_pokemon.moves)):
@@ -392,8 +451,24 @@ def Turn(Player, opponent):
 def endBattle(winner):
     # very simple end battle call to close the program
     print(f"The battle is over! {winner.name} is the winner!")
-    print("Thank you for playing!")
-    sys.exit()
+    print("Thank you for playing! Would you like to restart?")
+    # allow the user to restart with the same team if they wanted to
+    acceptable_inputs = [1, 2]
+    try: 
+        restart = int(input("1. Yes\n2. No\n"))
+    except ValueError:
+        restart = -1
+    while restart not in acceptable_inputs:
+        print("Invalid selection.")
+        try: 
+            restart = int(input("1. Yes\n2. No\n"))
+        except ValueError:
+            restart = -1
+    if restart == 2:
+        sys.exit()
+    elif restart == 1: 
+        startBattle()
+        Turn(Player, opponent)
 
 def main():
     # main loop
