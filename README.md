@@ -1,6 +1,6 @@
 # Pokemon Stadium Python Edition
-#### Video Demo:  <URL HERE>
-#### Description:
+#### Video Demo:  https://youtu.be/uLQTuiIT3JM
+#### Description: 
 
 ## Humble Beginnings
 Initially, I set out to follow up on a project I had started back when I first started learning Python. It was a Pokemon game where you walked around a grid of X's and would randomly encounter wild Pokemon. It was fun to make, and it was a mess. Like all good projects, my initial ambitions were much loftier than what ended up materializing as my final project.
