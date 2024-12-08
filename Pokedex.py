@@ -3,14 +3,14 @@ from Moves import *
 from Types import *
 
 # defined a list of Pokemon starting early in the dex to test
+# I did the first three myself and then Copilot filled in the rest
 
 Bulbasaur = Pokemon("Bulbasaur", 1, [Grass, Poison], 294, 197, 197, 240, 240, 197, [tackle, vine_whip, razor_leaf, solar_beam])
 Ivysaur = Pokemon("Ivysaur", 2, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
 Venusaur = Pokemon("Venusaur", 3, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
 Charmander = Pokemon("Charmander", 4, [Fire], 282, 203, 178, 240, 218, 251, [scratch, ember, fire_fang, flamethrower])
 Charmeleon = Pokemon("Charmeleon", 5, [Fire], 320, 223, 202, 284, 240, 284, [scratch, ember, fire_fang, flamethrower])
-# Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, ember, fire_fang, flamethrower])
-Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 900, 251, 328, [scratch, ember, fire_fang, flamethrower])
+Charizard = Pokemon("Charizard", 6, [Fire, Flying], 360, 267, 236, 328, 251, 328, [scratch, ember, fire_fang, flamethrower])
 Squirtle = Pokemon("Squirtle", 7, [Water], 292, 197, 251, 218, 251, 197, [tackle, water_gun, hydro_pump, surf])
 Wartortle = Pokemon("Wartortle", 8, [Water], 324, 223, 284, 240, 284, 223, [tackle, water_gun, hydro_pump, surf])
 Blastoise = Pokemon("Blastoise", 9, [Water], 362, 267, 328, 284, 328, 267, [tackle, water_gun, hydro_pump, surf])

@@ -359,6 +359,7 @@ def Turn(Player, opponent):
     global attackMult, defenseMult, spattackMult, spdefenseMult, speedMult
     global oppAttackMult, oppDefenseMult, oppSpattackMult, oppSpdefenseMult, oppSpeedMult
     # setting up this loop so the battle continues while the mons can fight
+    # the loop was Copilot's suggestion
     while Player.current_pokemon.battleHp > 0 and opponent.current_pokemon.battleHp > 0:
         # set the stats based on the current multipliers
         setStats(Player, opponent)
@@ -465,6 +466,7 @@ def endBattle(winner):
         except ValueError:
             restart = -1
     if restart == 2:
+        # using sys.exit was a suggestion by Copilot
         sys.exit()
     elif restart == 1: 
         startBattle()

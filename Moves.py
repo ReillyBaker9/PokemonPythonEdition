@@ -3,6 +3,7 @@ from Types import *
 
 # for status moves, the stats are 0. Attack 1. Defense 2. Special Attack 3. Special Defense 4. Speed
 # defining a handful of moves
+# I had copilot fill in the move data once I defined the class
 
 ember = Moves("Ember", Fire, 40, 100, "Special")
 fire_fang = Moves("Fire Fang", Fire, 65, 95, "Physical")

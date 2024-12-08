@@ -1,6 +1,7 @@
 from Classes import Types
 
 # defining all the types and giving them names
+# had copilot go down the list after the first few
 Fire = Types("Fire")
 Grass = Types("Grass")
 Water = Types("Water")
@@ -22,6 +23,7 @@ Dark = Types("Dark")
 
 
 # defining all the type multipliers for damage calculations
+# generation courtesy of Copilot
 type_effectiveness = {
     Normal: {Rock: 0.5, Ghost: 0, Steel: 0.5},
     Fire: {Fire: 0.5, Water: 0.5, Grass: 2, Ice: 2, Bug: 2, Rock: 0.5, Dragon: 0.5, Steel: 2},
