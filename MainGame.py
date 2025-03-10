@@ -1,9 +1,10 @@
 # from Classes import *
 from Pokedex import *
-# from random import randint
+from DamageCalcs import calcDamage
 from OpponentAI import *
-from Types import *
-from Test import *
+from Debug import debugInit
+# from Types import *
+from Helpers import *
 import copy
 import sys
 
@@ -11,20 +12,20 @@ import sys
 def initializeGame():
     # define the player as a global variable to add a team to
     global Player
+    global opponent
     # Player can decide their name and which Pokemon they want on their team
     Player.name = input("What is your name? ")
+    if Player.name.lower() == "debug":
+        opponent = Opponent("Gary", [])
+        debugInit(opponent)
+        Turn(Player, opponent)
     Player.team = []
-
-    # global pokeList
-    # pokeList = [Charizard, Venusaur, Blastoise]
     chooseTeam()
     return
 
 
 def chooseTeam():
-    global pokeList
-    pokeList = []
-
+    Player.team = []
     team_length = playerChoice("How many Pokemon would you like? (Max of 6)\n",
                                6) + 1
     # print out the entire Pokedex for number reference
@@ -36,18 +37,14 @@ def chooseTeam():
         selection = playerChoice(f"Which Pokemon do you want? Use the Pokedex # ({i + 1} of {team_length})\n",
                                  len(Pokedex))
         print(f"Chose {Pokedex[selection].name}!")
-        pokeList.append(Pokedex[selection])
-
-
-def startBattle():
-    Player.team = []
-    # using the copy module to create copies I can then modify the attributes of
-    for guy in pokeList:
-        team_member = copy.copy(guy)
+        # using the copy module to create copies I can then modify the attributes of
+        team_member = copy.copy(Pokedex[selection])
         # reset health and stat values in case player is restarting
         team_member.reset_health()
         Player.team.append(team_member)
 
+
+def startBattle():
     # print the team name for reference
     print("Your team consists of:")
     for k in range(len(Player.team)):
@@ -62,9 +59,6 @@ def startBattle():
         mon = copy.copy(Pokedex[pokeId])
         opponent.team.append(mon)
         team_size -= 1
-    # oppList = [Venusaur, Pidgeot, Beedrill]
-    # for each in oppList:
-    #     opponent.team.append(copy.copy(each))
     # bunch of text to set the stage of the battle
     print("You are challenged by " + opponent.name + "!")
     print(f"{opponent.name}'s team: ")
@@ -108,71 +102,6 @@ def checkAccuracy(move, Player, opponent, user):
         # 1 is the return value tested for a confirmed hit
         else:
             return 1
-
-
-def calcDamage(move, Attacker, Defender):
-    # comes from damage calc page on pokemon wiki, stays same for level 100
-    print(f"{Attacker.name}'s {Attacker.current_pokemon.name} used {move.name}!")
-    critMult = 1
-    # attack reductions and defense boosts are ignored if crit happens
-    crit = randint(1, 24)
-    if crit == 1:
-        critMult = 1.5
-        print("Critical hit!")
-        # if the effective attacking stat is lower than the base, use the base
-        if move.moveType == "Special":
-            if Attacker.current_pokemon.spattack > Attacker.current_pokemon.battleSpattack:
-                attacking_stat = Attacker.current_pokemon.spattack
-            else:
-                attacking_stat = Attacker.current_pokemon.battleSpattack
-            # if the effective defending stat is higher than the base, use the base
-            if Defender.current_pokemon.spdefense < Defender.current_pokemon.battleSpdefense:
-                defending_stat = Defender.current_pokemon.spdefense
-            else:
-                defending_stat = Defender.current_pokemon.battleSpdefense
-        else:
-            if Attacker.current_pokemon.attack > Attacker.current_pokemon.battleAttack:
-                attacking_stat = Attacker.current_pokemon.attack
-            else:
-                attacking_stat = Attacker.current_pokemon.battleAttack
-            if Defender.current_pokemon.defense < Defender.current_pokemon.battleDefense:
-                defending_stat = Defender.current_pokemon.defense
-            else:
-                defending_stat = Defender.current_pokemon.battleDefense
-    # stats used/impacted change depending on the move type
-    if move.moveType == "Special":
-        attacking_stat = Attacker.current_pokemon.battleSpattack
-        defending_stat = Defender.current_pokemon.battleSpdefense
-    else:
-        attacking_stat = Attacker.current_pokemon.battleAttack
-        defending_stat = Defender.current_pokemon.battleDefense
-    # based on Pokemon wiki
-    level_const = 42
-    # all equations are from wiki
-    base_damage = ((level_const * move.power * (attacking_stat / defending_stat)) / 50) + 2
-    # adding Same Type Attack Bonus if attack type matches user's
-    if move.type in Attacker.current_pokemon.type:
-        stab_mult = 1.5
-    else:
-        stab_mult = 1.0
-    # all attacks include a random bounded multiplier
-    random_factor = (randint(85, 100)) / 100
-    # the type multiplier changes based on the effectiveness of the move
-    # supereffective moves have higher multipliers, not very effective less
-    type_mult = 1.0
-    for defender_type in Defender.current_pokemon.type:
-        if defender_type in type_effectiveness.get(move.type, {}):
-            type_mult *= type_effectiveness[move.type][defender_type]
-    # Print effectiveness message, if present
-    if type_mult > 1:
-        print("It's super effective!")
-    elif type_mult < 1:
-        print("It's not very effective...")
-
-    damage = int(base_damage * stab_mult * random_factor * type_mult * critMult)
-    # updating the hp based on the total damage value
-    Defender.current_pokemon.battleHp = int(Defender.current_pokemon.battleHp - damage)
-    return
 
 
 def playerSwitch(Player, forced):
