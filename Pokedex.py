@@ -5,6 +5,7 @@ from Types import *
 # defined a list of Pokemon starting early in the dex to test
 # I did the first three myself and then Copilot filled in the rest
 
+# MissingNo = Pokemon("MissingNo", 0, [Steel, Fairy], 400, 300, 300, 300, 300, 400, [surf, flamethrower, hyper_fang, razor_leaf])
 Bulbasaur = Pokemon("Bulbasaur", 1, [Grass, Poison], 294, 197, 197, 240, 240, 197, [tackle, vine_whip, razor_leaf, solar_beam])
 Ivysaur = Pokemon("Ivysaur", 2, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
 Venusaur = Pokemon("Venusaur", 3, [Grass, Poison], 364, 236, 236, 284, 284, 236, [tackle, vine_whip, razor_leaf, solar_beam])
