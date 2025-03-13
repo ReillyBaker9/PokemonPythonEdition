@@ -4,6 +4,7 @@ import random
 import requests
 import json
 
+POKE_LEVEL=100
 
 def get_pokemon_data(pokemon_name):
     if isinstance(pokemon_name, str):
@@ -34,7 +35,30 @@ def get_pokemon_data(pokemon_name):
             if move:  # Ensure move data is valid
                 moves.append(move)
                 print(f"Added {move.name}")
+        EV = 0
+        IV = 0
+        Nature = 1
+        pokeStats['hp'] = (((2 * pokeStats['hp'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + POKE_LEVEL + 10
+        pokeStats['attack'] = ((((2 * pokeStats['attack'] + IV + (
+                    EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        pokeStats['defense'] = ((((2 * pokeStats['defense'] + IV + (
+                    EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        pokeStats['special-attack'] = ((((2 * pokeStats['special-attack'] + IV + (
+                    EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        pokeStats['special-defense'] = ((((2 * pokeStats['special-defense'] + IV + (
+                    EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        pokeStats['speed'] = ((((2 * pokeStats['speed'] + IV + (
+                    EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
         pokemon = Pokemon(pokemon_name, pokedex, types, pokeStats, moves)
+        # EV = 0
+        # IV = 0
+        # Nature = 1
+        # pokemon.pokeStats['hp'] = (((2 * pokemon.pokeStats['hp'] + IV + (EV/4)) * POKE_LEVEL)/100) + POKE_LEVEL + 10
+        # pokemon.pokeStats['attack'] = ((((2 * pokemon.pokeStats['attack'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        # pokemon.pokeStats['defense'] = ((((2 * pokemon.pokeStats['defense'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        # pokemon.pokeStats['special-attack'] = ((((2 * pokemon.pokeStats['special-attack'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        # pokemon.pokeStats['special-defense'] = ((((2 * pokemon.pokeStats['special-defense'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
+        # pokemon.pokeStats['speed'] = ((((2 * pokemon.pokeStats['speed'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
         return pokemon
     else:
         return None

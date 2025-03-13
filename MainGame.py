@@ -240,7 +240,7 @@ def oppHealthCheck(opponent):
 
 def generateHealthBars(Player, opponent):
     # setting the increment of hp to be displayed to be 20
-    hpMultiple = 5
+    hpMultiple = 20
     # every 20 health remaining is a hash, every 20 health missing is a space
     hashes = int(Player.current_pokemon.battleStats['hp'] / hpMultiple)
     spaces = int((Player.current_pokemon.pokeStats["hp"] - Player.current_pokemon.battleStats['hp']) / hpMultiple)

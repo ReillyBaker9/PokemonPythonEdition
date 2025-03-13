@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9de1c0bb-1de4-4e33-b83d-f38438ba545e" name="Changes" comment="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat">
-      <change afterPath="$PROJECT_DIR$/APIConnect.py" afterDir="false" />
+    <list default="true" id="9de1c0bb-1de4-4e33-b83d-f38438ba545e" name="Changes" comment="HUGE UPDATE!!! Made the game us the PokeAPI to get Pokemon and move information. This was a huge lift and is currently very messy, but I need to go to work. For now, the game works, status moves don't, nor do extra effects, but you can battle! Next up is cleaning up the code and making the Pokemon base stats work for level 100">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DamageCalcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/DamageCalcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug.py" beforeDir="false" afterPath="$PROJECT_DIR$/Debug.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Moves.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moves.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpponentAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpponentAI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Types.py" beforeDir="false" afterPath="$PROJECT_DIR$/Types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIConnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/APIConnect.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,17 +44,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.APITest.executor": "Run",
-    "Python.MainGame.executor": "Run",
-    "Python.MainGameAPITest.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/reillybaker/PycharmProjects/Pokemon",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.APITest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MainGame.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MainGameAPITest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/reillybaker/PycharmProjects/Pokemon&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -99,12 +92,21 @@
       <option name="project" value="LOCAL" />
       <updated>1741631080357</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="HUGE UPDATE!!! Made the game us the PokeAPI to get Pokemon and move information. This was a huge lift and is currently very messy, but I need to go to work. For now, the game works, status moves don't, nor do extra effects, but you can battle! Next up is cleaning up the code and making the Pokemon base stats work for level 100">
+      <option name="closed" value="true" />
+      <created>1741871970762</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741871970762</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Trimmed out the player choice error handling and replaced with a reusable method" />
     <MESSAGE value="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat" />
+    <MESSAGE value="HUGE UPDATE!!! Made the game us the PokeAPI to get Pokemon and move information. This was a huge lift and is currently very messy, but I need to go to work. For now, the game works, status moves don't, nor do extra effects, but you can battle! Next up is cleaning up the code and making the Pokemon base stats work for level 100" />
+    <option name="LAST_COMMIT_MESSAGE" value="HUGE UPDATE!!! Made the game us the PokeAPI to get Pokemon and move information. This was a huge lift and is currently very messy, but I need to go to work. For now, the game works, status moves don't, nor do extra effects, but you can battle! Next up is cleaning up the code and making the Pokemon base stats work for level 100" />
   </component>
 </project>
