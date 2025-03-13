@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9de1c0bb-1de4-4e33-b83d-f38438ba545e" name="Changes" comment="Trimmed out the player choice error handling and replaced with a reusable method" />
+    <list default="true" id="9de1c0bb-1de4-4e33-b83d-f38438ba545e" name="Changes" comment="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat">
+      <change afterPath="$PROJECT_DIR$/APIConnect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DamageCalcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/DamageCalcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug.py" beforeDir="false" afterPath="$PROJECT_DIR$/Debug.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainGame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Moves.py" beforeDir="false" afterPath="$PROJECT_DIR$/Moves.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpponentAI.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpponentAI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Types.py" beforeDir="false" afterPath="$PROJECT_DIR$/Types.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,18 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ReillyBaker9"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ReillyBaker9&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ReillyBaker9/Pokemon.git",
-    "accountId": "68f9c3f1-a672-4210-8b92-0a47884f19f1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ReillyBaker9/Pokemon.git&quot;,
+    &quot;accountId&quot;: &quot;68f9c3f1-a672-4210-8b92-0a47884f19f1&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -41,14 +51,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.MainGame.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.APITest.executor": "Run",
+    "Python.MainGame.executor": "Run",
+    "Python.MainGameAPITest.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/reillybaker/PycharmProjects/Pokemon",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -73,11 +91,20 @@
       <option name="project" value="LOCAL" />
       <updated>1741571376907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat">
+      <option name="closed" value="true" />
+      <created>1741631080357</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741631080357</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Trimmed out the player choice error handling and replaced with a reusable method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trimmed out the player choice error handling and replaced with a reusable method" />
+    <MESSAGE value="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Debug mode for a quick jump to the battle screen. Started organizing functions into respective Python files. Trimmed some fat" />
   </component>
 </project>

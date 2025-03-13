@@ -12,38 +12,38 @@ def calcDamage(move, Attacker, Defender):
         critMult = 1.5
         print("Critical hit!")
         # if the effective attacking stat is lower than the base, use the base
-        if move.moveType == "Special":
-            if Attacker.current_pokemon.spattack > Attacker.current_pokemon.battleSpattack:
-                attacking_stat = Attacker.current_pokemon.spattack
+        if move.damage_class == "Special":
+            if Attacker.current_pokemon.pokeStats['special-attack'] > Attacker.current_pokemon.battleStats['special-attack']:
+                attacking_stat = Attacker.current_pokemon.pokeStats['special-attack']
             else:
-                attacking_stat = Attacker.current_pokemon.battleSpattack
+                attacking_stat = Attacker.current_pokemon.battleStats['special-attack']
             # if the effective defending stat is higher than the base, use the base
-            if Defender.current_pokemon.spdefense < Defender.current_pokemon.battleSpdefense:
-                defending_stat = Defender.current_pokemon.spdefense
+            if Defender.current_pokemon.pokeStats['special-defense'] < Defender.current_pokemon.battleStats['special-defense']:
+                defending_stat = Defender.current_pokemon.pokeStats['special-defense']
             else:
-                defending_stat = Defender.current_pokemon.battleSpdefense
+                defending_stat = Defender.current_pokemon.battleStats['special-defense']
         else:
-            if Attacker.current_pokemon.attack > Attacker.current_pokemon.battleAttack:
-                attacking_stat = Attacker.current_pokemon.attack
+            if Attacker.current_pokemon.pokeStats['attack'] > Attacker.current_pokemon.battleStats['attack']:
+                attacking_stat = Attacker.current_pokemon.pokeStats['attack']
             else:
-                attacking_stat = Attacker.current_pokemon.battleAttack
-            if Defender.current_pokemon.defense < Defender.current_pokemon.battleDefense:
-                defending_stat = Defender.current_pokemon.defense
+                attacking_stat = Attacker.current_pokemon.battleStats['attack']
+            if Defender.current_pokemon.pokeStats['defense'] < Defender.current_pokemon.battleStats['defense']:
+                defending_stat = Defender.current_pokemon.pokeStats['defense']
             else:
-                defending_stat = Defender.current_pokemon.battleDefense
+                defending_stat = Defender.current_pokemon.battleStats['defense']
     # stats used/impacted change depending on the move type
-    if move.moveType == "Special":
-        attacking_stat = Attacker.current_pokemon.battleSpattack
-        defending_stat = Defender.current_pokemon.battleSpdefense
+    if move.damage_class == "Special":
+        attacking_stat = Attacker.current_pokemon.battleStats['special-attack']
+        defending_stat = Defender.current_pokemon.battleStats['special-defense']
     else:
-        attacking_stat = Attacker.current_pokemon.battleAttack
-        defending_stat = Defender.current_pokemon.battleDefense
+        attacking_stat = Attacker.current_pokemon.battleStats['attack']
+        defending_stat = Defender.current_pokemon.battleStats['defense']
     # based on Pokemon wiki
     level_const = 42
     # all equations are from wiki
     base_damage = ((level_const * move.power * (attacking_stat / defending_stat)) / 50) + 2
     # adding Same Type Attack Bonus if attack type matches user's
-    if move.type in Attacker.current_pokemon.type:
+    if move.move_type in Attacker.current_pokemon.type:
         stab_mult = 1.5
     else:
         stab_mult = 1.0
@@ -53,8 +53,8 @@ def calcDamage(move, Attacker, Defender):
     # supereffective moves have higher multipliers, not very effective less
     type_mult = 1.0
     for defender_type in Defender.current_pokemon.type:
-        if defender_type in type_effectiveness.get(move.type, {}):
-            type_mult *= type_effectiveness[move.type][defender_type]
+        if defender_type in type_effectiveness.get(move.move_type, {}):
+            type_mult *= type_effectiveness[move.move_type][defender_type]
     # Print effectiveness message, if present
     if type_mult > 1:
         print("It's super effective!")
@@ -63,5 +63,5 @@ def calcDamage(move, Attacker, Defender):
 
     damage = int(base_damage * stab_mult * random_factor * type_mult * critMult)
     # updating the hp based on the total damage value
-    Defender.current_pokemon.battleHp = int(Defender.current_pokemon.battleHp - damage)
+    Defender.current_pokemon.battleStats['hp'] = int(Defender.current_pokemon.battleStats['hp'] - damage)
     return

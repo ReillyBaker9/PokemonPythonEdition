@@ -9,7 +9,7 @@ def switch_on_faint(opponent):
     # if they have no Pokemon left, return None and the battle ends
     global oppAttackMult, oppDefenseMult, oppSpattackMult, oppSpdefenseMult, oppSpeedMult
     for mon in opponent.team:
-        if mon.battleHp > 0:
+        if mon.battleStats['hp'] > 0:
             print(f"{opponent.name} sent out {mon.name}!")
             oppAttackMult = oppDefenseMult = oppSpattackMult = oppSpdefenseMult = oppSpeedMult = 0
             return mon 

@@ -1,44 +1,32 @@
 class Pokemon:
-    def __init__(self, name, pokedex, types, hp, attack, defense, spattack, spdefense, speed, moves):
+    def __init__(self, name, pokedex, types, pokeStats, moves):
         # battle stats start as the same as base stats and are modified in battle
         self.name = name
         self.pokedex = pokedex
         self.type = types
-        self.hp = hp
-        self.attack = attack
-        self.defense = defense
-        self.spattack = spattack
-        self.spdefense = spdefense
-        self.speed = speed
+        self.pokeStats = pokeStats
+        self.battleStats = self.pokeStats.copy()
         self.moves = moves
-        self.battleHp = hp
-        self.battleAttack = attack
-        self.battleDefense = defense
-        self.battleSpattack = spattack
-        self.battleSpdefense = spdefense
-        self.battleSpeed = speed
-    
-    # suggested by CoPilot as a way to reset 
-    # health after restarting the battle
+
+
     def reset_health(self):
-        self.battleHp = self.hp
-        self.battleAttack = self.attack
-        self.battleDefense = self.defense
-        self.battleSpattack = self.spattack
-        self.battleSpdefense = self.spdefense
-        self.battleSpeed = self.speed
+        self.battleStats = self.pokeStats.copy()
 
 
 class Moves:
-    def __init__(self, name, type, power, accuracy, moveType, target=None, modifier=None, stat=None):
+    def __init__(self, name, move_type, accuracy, effect_chance, priority, power, damage_class, target, effect_category,
+                 stat_modifier, stat):
         # target, modifier, and stat only have values if move is a status move
         self.name = name
-        self.type = type
-        self.power = power
+        self.move_type = move_type
         self.accuracy = accuracy
-        self.moveType = moveType
+        self.effect_chance = effect_chance
+        self.priority = priority
+        self.power = power
+        self.damage_class = damage_class
         self.target = target
-        self.modifier = modifier
+        self.effect_category = effect_category
+        self.stat_modifier = stat_modifier
         self.stat = stat
 
 
