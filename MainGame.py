@@ -11,6 +11,8 @@ import copy
 import sys
 
 POKEDEX_MAX = 1025
+
+
 def initializeGame():
     # define the player as a global variable to add a team to
     global Player
@@ -122,7 +124,7 @@ def playerSwitch(Player, forced):
     # so the back button is not available like it is in the battle menu
     if not forced:
         print(f"{len(Player.team) + 1}. Back")
-        mon = playerChoice("Which Pokemon will you switch to? ", len(Player.team)+1)
+        mon = playerChoice("Which Pokemon will you switch to? ", len(Player.team) + 1)
         if mon == (len(Player.team)):
             Turn(Player, opponent)
     else:
@@ -203,17 +205,27 @@ def setStats(Player, opponent):
     global oppAttackMult, oppDefenseMult, oppSpattackMult, oppSpdefenseMult, oppSpeedMult
     # change the in-battle stat of the Pokemon to its base stat times the multiplier
     # could probably do this with arrays and for loops, but meh
-    Player.current_pokemon.battleStats["attack"] = Player.current_pokemon.pokeStats["attack"] * stat_multipliers[attackMult]
-    Player.current_pokemon.battleStats["defense"] = Player.current_pokemon.pokeStats["defense"] * stat_multipliers[defenseMult]
-    Player.current_pokemon.battleStats["special-attack"] = Player.current_pokemon.pokeStats["special-attack"] * stat_multipliers[spattackMult]
-    Player.current_pokemon.battleStats["special-defense"] = Player.current_pokemon.pokeStats["special-defense"] * stat_multipliers[spdefenseMult]
-    Player.current_pokemon.battleStats["speed"] = Player.current_pokemon.pokeStats["speed"] * stat_multipliers[speedMult]
+    Player.current_pokemon.battleStats["attack"] = Player.current_pokemon.pokeStats["attack"] * stat_multipliers[
+        attackMult]
+    Player.current_pokemon.battleStats["defense"] = Player.current_pokemon.pokeStats["defense"] * stat_multipliers[
+        defenseMult]
+    Player.current_pokemon.battleStats["special-attack"] = Player.current_pokemon.pokeStats["special-attack"] * \
+                                                           stat_multipliers[spattackMult]
+    Player.current_pokemon.battleStats["special-defense"] = Player.current_pokemon.pokeStats["special-defense"] * \
+                                                            stat_multipliers[spdefenseMult]
+    Player.current_pokemon.battleStats["speed"] = Player.current_pokemon.pokeStats["speed"] * stat_multipliers[
+        speedMult]
     # same for opponent's Pokemon
-    opponent.current_pokemon.battleStats["attack"] = opponent.current_pokemon.pokeStats["attack"] * stat_multipliers[oppAttackMult]
-    opponent.current_pokemon.battleStats["defense"] = opponent.current_pokemon.pokeStats["defense"] * stat_multipliers[oppDefenseMult]
-    opponent.current_pokemon.battleStats["special-attack"] = opponent.current_pokemon.pokeStats["special-attack"] * stat_multipliers[oppSpattackMult]
-    opponent.current_pokemon.battleStats["special-defense"] = opponent.current_pokemon.pokeStats["special-defense"] * stat_multipliers[oppSpdefenseMult]
-    opponent.current_pokemon.battleStats["speed"] = opponent.current_pokemon.pokeStats["speed"] * stat_multipliers[oppSpeedMult]
+    opponent.current_pokemon.battleStats["attack"] = opponent.current_pokemon.pokeStats["attack"] * stat_multipliers[
+        oppAttackMult]
+    opponent.current_pokemon.battleStats["defense"] = opponent.current_pokemon.pokeStats["defense"] * stat_multipliers[
+        oppDefenseMult]
+    opponent.current_pokemon.battleStats["special-attack"] = opponent.current_pokemon.pokeStats["special-attack"] * \
+                                                             stat_multipliers[oppSpattackMult]
+    opponent.current_pokemon.battleStats["special-defense"] = opponent.current_pokemon.pokeStats["special-defense"] * \
+                                                              stat_multipliers[oppSpdefenseMult]
+    opponent.current_pokemon.battleStats["speed"] = opponent.current_pokemon.pokeStats["speed"] * stat_multipliers[
+        oppSpeedMult]
     return
 
 
@@ -334,11 +346,12 @@ def Turn(Player, opponent):
                       f"({Player.current_pokemon.moves[i].damage_class})")
             print(f"{len(Player.current_pokemon.moves) + 1}. Back")
             # input error handling
-            move_index = playerChoice("Select move: ", len(Player.current_pokemon.moves)+1)
+            move_index = playerChoice("Select move: ", len(Player.current_pokemon.moves) + 1)
             if move_index == len(Player.current_pokemon.moves):
                 continue
             # If opponent is faster:
-            if calcPriority(Player.current_pokemon.battleStats["speed"], opponent.current_pokemon.battleStats["speed"]) == 1:
+            if calcPriority(Player.current_pokemon.battleStats["speed"],
+                            opponent.current_pokemon.battleStats["speed"]) == 1:
                 opponentTurn(Player, opponent)
                 playerHealthCheck(Player, opponent)
                 if checkAccuracy(Player.current_pokemon.moves[move_index], Player, opponent, 0) == 1:

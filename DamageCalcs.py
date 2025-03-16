@@ -1,5 +1,5 @@
 from random import randint
-from Types import type_effectiveness
+from Types import type_effectiveness, type_mapping
 
 
 def calcDamage(move, Attacker, Defender):
@@ -53,9 +53,11 @@ def calcDamage(move, Attacker, Defender):
     # supereffective moves have higher multipliers, not very effective less
     type_mult = 1.0
     for defender_type in Defender.current_pokemon.type:
-        if defender_type in type_effectiveness.get(move.move_type, {}):
-            type_mult *= type_effectiveness[move.move_type][defender_type]
+        print(move.move_type + " against " + defender_type.name)
+        if defender_type.name in type_effectiveness.get(move.move_type, {}):
+            type_mult *= type_effectiveness[move.move_type][defender_type.name]
     # Print effectiveness message, if present
+    print(type_mult)
     if type_mult > 1:
         print("It's super effective!")
     elif type_mult < 1:
@@ -63,5 +65,6 @@ def calcDamage(move, Attacker, Defender):
 
     damage = int(base_damage * stab_mult * random_factor * type_mult * critMult)
     # updating the hp based on the total damage value
+    print("Did " + str(damage) + " damage!")
     Defender.current_pokemon.battleStats['hp'] = int(Defender.current_pokemon.battleStats['hp'] - damage)
     return

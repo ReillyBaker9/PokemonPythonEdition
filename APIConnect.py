@@ -6,6 +6,7 @@ import json
 
 POKE_LEVEL=100
 
+
 def get_pokemon_data(pokemon_name):
     if isinstance(pokemon_name, str):
         url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}/"
@@ -20,7 +21,7 @@ def get_pokemon_data(pokemon_name):
         pokedex = data["id"]
         pokemon_name = data["name"].capitalize()
         for type in data["types"]:
-            types.append(type_mapping[type["type"]["name"]])
+            types.append(type_mapping[type["type"]["name"].capitalize()])
         for stat in data["stats"]:
             pokeStats[stat["stat"]["name"]] = int(stat["base_stat"])
         # Get all available moves from API
@@ -50,15 +51,6 @@ def get_pokemon_data(pokemon_name):
         pokeStats['speed'] = ((((2 * pokeStats['speed'] + IV + (
                     EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
         pokemon = Pokemon(pokemon_name, pokedex, types, pokeStats, moves)
-        # EV = 0
-        # IV = 0
-        # Nature = 1
-        # pokemon.pokeStats['hp'] = (((2 * pokemon.pokeStats['hp'] + IV + (EV/4)) * POKE_LEVEL)/100) + POKE_LEVEL + 10
-        # pokemon.pokeStats['attack'] = ((((2 * pokemon.pokeStats['attack'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
-        # pokemon.pokeStats['defense'] = ((((2 * pokemon.pokeStats['defense'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
-        # pokemon.pokeStats['special-attack'] = ((((2 * pokemon.pokeStats['special-attack'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
-        # pokemon.pokeStats['special-defense'] = ((((2 * pokemon.pokeStats['special-defense'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
-        # pokemon.pokeStats['speed'] = ((((2 * pokemon.pokeStats['speed'] + IV + (EV / 4)) * POKE_LEVEL) / 100) + 5) * Nature
         return pokemon
     else:
         return None
@@ -72,7 +64,7 @@ def get_move_data(move_name):
         stat_modifier = []
         stat = []
         name = move_name
-        move_type = data["type"]["name"]
+        move_type = data["type"]["name"].capitalize()
         accuracy = data["accuracy"]
         effect_chance = data["effect_chance"]
         priority = data["priority"]
